@@ -74,8 +74,8 @@ const questions = () => {
 
     function rememberMyFilms() {
         for (let i = 0; i < 2; i++) {
-            const lastViewFilm = prompt('Один из просмотренных фильмов?', '');
-            const rating = +prompt('На сколько вы оценили его?', '');
+            const lastViewFilm = prompt('Один из просмотренных фильмов?', '').trim();
+            const rating = +prompt('На сколько вы оценили его?', '').trim();
 
             if (lastViewFilm != null && rating != null && lastViewFilm != '' && rating != '' && lastViewFilm.length <= 50) {
                 personalMovieDB.movies[lastViewFilm] = rating;
