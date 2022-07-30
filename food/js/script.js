@@ -38,7 +38,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // Timer
 
-    const deadline = '2022-08-20';
+    const deadline = '2022-08-30';
 
     function getTimeRemaining(endtime) {
         const t = Date.parse(endtime) - Date.parse(new Date()),
@@ -85,10 +85,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
             if (t.t <= 0) {
                 clearInterval(timeInterval);
-                days.textContent = '--'
-                hours.textContent = '--'
-                minutes.textContent = '--'
-                seconds.textContent = '--'
+                days.textContent = hours.textContent = minutes.textContent = seconds.textContent = '00';
             }
         }
     }
