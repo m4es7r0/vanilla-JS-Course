@@ -135,17 +135,25 @@ document.addEventListener('DOMContentLoaded', () => {
     // Card
 
     class Card {
-        constructor(parentSelector, img, alt, title, text, price, currency) {
+        constructor(parentSelector, img, alt, title, text, price, currency, ...classes) {
             this.img = img
             this.alt = alt
             this.title = title
             this.text = text
             this.price = price
             this.currency = currency
-            this.parentSelector = document.querySelector(parentSelector);
+            this.parentSelector = document.querySelector(parentSelector)
+            this.classes = classes;
         }
         mount() {
-            const item = document.createElement('div');
+            const card = document.createElement('div');
+            if (this.classes.length === 0) {
+                this.card = 'menu__item';
+                card.classList.add(this.card)
+            } else {
+                this.classes.forEach(className => card.classList.add(className));
+            }
+            
 
             switch (this.currency) {
                 case 'UAH':
@@ -161,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     this.currency = '₴'
             }
 
-            item.innerHTML = `<div class="menu__item">
+            card.innerHTML = `
                                 <img src=${this.img} alt="${this.alt}">
                                 <h3 class="menu__item-subtitle">${this.title}</h3>
                                 <div class="menu__item-descr">${this.text}</div>
@@ -173,9 +181,9 @@ document.addEventListener('DOMContentLoaded', () => {
                                     </div>
                                 </div>
                                 </div>
-                             </div>`;
+                             `;
 
-            this.parentSelector.append(item);
+            this.parentSelector.append(card);
 
         }
     }
@@ -189,7 +197,8 @@ document.addEventListener('DOMContentLoaded', () => {
         овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной
         ценой и высоким качеством!`,
         229,
-        'USD').mount()
+        'USD',
+        ).mount()
     new Card(
         '.menu__field .container',
         'img/tabs/elite.jpg',
@@ -199,7 +208,8 @@ document.addEventListener('DOMContentLoaded', () => {
         и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода
         в ресторан!`,
         550,
-        'EUR').mount()
+        'EUR',
+        'menu__item').mount()
     new Card(
         '.menu__field .container',
         'img/tabs/post.jpg',
@@ -209,10 +219,11 @@ document.addEventListener('DOMContentLoaded', () => {
         продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное
         количество белков за счет тофу и импортных вегетарианских стейков.`,
         430,
-        'UAH').mount()
+        'UAH',
+        'menu__item').mount()
 
     // [cardFirst, cardSecond, cardThid].forEach(i => i.mount())
 
-    
+
 
 });
